@@ -1,0 +1,43 @@
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "Solati Labs",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node -r dotenv/config src/server.js",
+    "dev": "nodemon -r dotenv/config src/server.js --watch src --watch src/server.js",
+    "test": "mocha --exit",
+    "lint": "eslint ./",
+    "lint:fix": "eslint ./ --fix"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.634.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "express": "^4.17.1",
+    "helmet": "^3.21.3",
+    "http-status-codes": "^1.4.0",
+    "i18n": "^0.8.5",
+    "jsonwebtoken": "^8.5.1",
+    "leveldown": "^5.4.1",
+    "levelup": "^4.3.2",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.1",
+    "nodemon": "^2.0.2",
+    "rand-token": "^0.4.0",
+    "raygun": "^0.10.2"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "mocha": "^6.2.2",
+    "request": "^2.88.2",
+    "supertest": "^4.0.2"
+  }
+}

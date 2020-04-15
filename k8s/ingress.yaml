@@ -1,0 +1,10 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: monitoreo-api-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "gke-test-ip"
+spec:
+  backend:
+    serviceName: monitoreo-api
+    servicePort: 3000
