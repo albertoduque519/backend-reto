@@ -12,7 +12,7 @@ services:
       - .env
   database:
     container_name: database
-    image: "postgres"
+    image: "postgres:9.4"
     ports:
       - "5431:5432"
     env_file:

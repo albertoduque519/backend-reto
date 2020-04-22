@@ -10,7 +10,7 @@ data:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-pv-claim
+  name: postgres-pv-claim2
 spec:
   accessModes:
     - ReadWriteOnce
@@ -21,20 +21,20 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: postgres
+  name: postgres3
 spec:
   template:
     metadata:
       labels:
-        app: postgres
+        app: postgres3
     spec:
       volumes:
-        - name: postgres-storage
+        - name: postgres-storage2
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: postgres-pv-claim2
       containers:
-        - image: postgres
-          name: postgres
+        - image: postgres:10
+          name: postgres3
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -50,18 +50,18 @@ spec:
               value: /var/lib/postgresql/data/pgdata
           ports:
             - containerPort: 5432
-              name: postgres
+              name: postgres3
           volumeMounts:
-            - name: postgres-storage
+            - name: postgres-storage2
               mountPath: /var/lib/postgresql/data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres
+  name: postgres3
 spec:
   type: ClusterIP
   ports:
     - port: 5432
   selector:
-    app: postgres
+    app: postgres3
