@@ -28,9 +28,11 @@
     "method-override": "^3.0.0",
     "morgan": "^1.9.1",
     "nodemon": "^2.0.2",
-    "pg": "^8.0.2",
+    "pg": "^8.0.3",
+    "pg-hstore": "^2.3.3",
     "rand-token": "^0.4.0",
-    "raygun": "^0.10.2"
+    "raygun": "^0.10.2",
+    "sequelize": "^5.21.6"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.3",

@@ -1,23 +1,13 @@
 version: "3"
 services:
-  gke-solati-deployment:
-    build: .
-    command: npm run start
-    volumes:
-      - .:/usr/src/node/
-      - /usr/src/node/node_modules
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
   database:
     container_name: database
-    image: "postgres:9.4"
+    image: "postgres:10"
     ports:
       - "5431:5432"
     env_file:
       - .env
     volumes:
-      - database-datas:/var/lib/postgresql/data/
+      - database-datas4:/var/lib/postgresql/data/
 volumes:
-  database-datas:
+  database-datas4:

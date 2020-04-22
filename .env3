@@ -6,5 +6,3 @@ DB_HOST=postgres3
 DB_USER=root
 DB_PASSWORD=root
 DB_DATABASE=db_monitoreo
-POSTGRES_USER=root
-POSTGRES_PASSWORD=root
