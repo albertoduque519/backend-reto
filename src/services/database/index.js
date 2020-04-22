@@ -11,9 +11,12 @@ const knex = Knex({
   },
   log: {
     warn(message) {
+      console.log(message)
       // sobre escribo la funcion para no mostrar eventos de desconexion en el pool
     }
   }
 })
-
+console.log(process.env.DB_HOST)
+console.log(process.env.DB_PASSWORD)
+console.log(process.env.DB_DATABASE)
 module.exports = knex
