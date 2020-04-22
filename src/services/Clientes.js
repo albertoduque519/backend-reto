@@ -1,9 +1,14 @@
 const ServiceError = require('../helpers/error')
-const db = require('./database')
+const Clientes = require('../models/Clientes')
 
 const getClients = async function () {
-  let query = db('cclientes')
-  let result = await query
+  let result = Clientes.findAll({ attributes: ['id', 'cliente'], raw: true })
+    .then(users => {
+      console.log(users)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   return result.map(item => {
     return {
       id: item.id,
