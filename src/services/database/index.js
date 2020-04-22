@@ -1,7 +1,7 @@
 const Knex = require('knex')
 
 const knex = Knex({
-  client: 'pg',
+  client: 'postgres',
   connection: {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
