@@ -2,10 +2,7 @@ const ServiceError = require('../helpers/error')
 const Clientes = require('../models/Clientes')
 
 const getClients = async function () {
-  let result = Clientes.findAll({ attributes: ['id', 'cliente'], raw: true })
-    .then(users => {
-      console.log(users)
-    })
+  let result = await Clientes.findAll({ attributes: ['id', 'cliente'], raw: true })
     .catch(err => {
       console.log(err)
     })
