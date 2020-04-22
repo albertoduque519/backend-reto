@@ -1,23 +1,22 @@
 const ServiceError = require('../helpers/error')
 const db = require('./database')
+const sequelize = require('./database')
+const { QueryTypes } = require('sequelize');
 
 const getDiskSpaceStatsByClient = async function (idClient = null) {
-  let query = db('cclientes')
-    .select('mmedicion_cliente.tipo')
-    .sum('medicion_cliente_resultado.tamano as tamano')
-    .innerJoin('medicion_cliente_resultado', 'medicion_cliente_resultado.idcliente', 'cclientes.id')
-    .leftJoin('mmedicion_cliente', 'medicion_cliente_resultado.idmedicion_cliente', 'mmedicion_cliente.id')
-
-  query.where('mmedicion_cliente.ambiente', 'prod')
+  let where = ''
   if (idClient) {
-    console.log("cliente", idClient);
-    query.whereIn('mmedicion_cliente.idcliente', idClient)
+    where = 'WHERE mmedicion_cliente.idcliente IN (' + idClient + ')'
   }
+  let groupBy = ' group By mmedicion_cliente.tipo'
 
-  query.groupBy('mmedicion_cliente.tipo')
+  const records = await sequelize.query('select sum(medicion_cliente_resultado.tamano) as tamano' +
+    ' FROM cclientes INNER JOIN medicion_cliente_resultado ON(medicion_cliente_resultado.idcliente = cclientes.id)' +
+    ' LEFT JOIN mmedicion_cliente ON(medicion_cliente_resultado.idmedicion_cliente=mmedicion_cliente.id)' + where + groupBy, {
+    type: QueryTypes.SELECT
+  });
 
-  let result = await query
-  return result.map(item => {
+  return records.map(item => {
     return {
       tipo: item.tipo,
       tamano: item.tamano,
