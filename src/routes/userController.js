@@ -1,3 +1,4 @@
+const usersService = require('../services/Clientes')
 const refreshTokens = {};
 
 exports.getUserInfo = (req, res) => {
@@ -11,7 +12,9 @@ exports.updateUser = (req, res) => {
   res.json(datos);
 };
 
-exports.getData = (req, res) => {
+exports.getData = async (req, res) => {
+  let clientes = await usersService.getClients()
+  console.log(clientes)
   const datos = [
     { id: 1, nombre: "Clients" },
     { id: 2, nombre: "Denisse" },
