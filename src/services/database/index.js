@@ -9,6 +9,13 @@ const knex = Knex({
     database: process.env.DB_DATABASE,
     port: process.env.DB_PORT || 5432
   },
+  pool: {
+    "min": 0,
+    "max": 50,
+    "idleTimeoutMillis": 30000,
+    "createTimeoutMillis": 30000,
+    "acquireTimeoutMillis": 30000
+  },
   log: {
     warn(message) {
       console.log(message)
