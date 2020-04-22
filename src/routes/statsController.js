@@ -1,7 +1,12 @@
 const statsService = require('../services/Stats')
 
 exports.getDiskSpaceStatsByClient = async (req, res) => {
-  //let stats = await statsService.getDiskSpaceStatsByClient(req.query.idClientes)
+  try {
+    let stats = await statsService.getDiskSpaceStatsByClient(req.query.idClientes)
+    console.log(stats)
+  } catch (e) {
+    console.log(e)
+  }
   let stats = [{ "tipo": "bd", "tamano": "71674688136" }, { "tipo": "logs", "tamano": "414449665" }]
   if (req.query.idClientes.length > 1)
     stats = [{ "tipo": "bd", "tamano": "91674688136" }, { "tipo": "logs", "tamano": "114449665" }]
