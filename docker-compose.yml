@@ -9,5 +9,15 @@ services:
       - .env
     volumes:
       - database-datas4:/var/lib/postgresql/data/
+  gke-solati-deployment:
+    build: .
+    command: npm run start
+    volumes:
+      - .:/usr/src/node/
+      - /usr/src/node/node_modules
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
 volumes:
   database-datas4:

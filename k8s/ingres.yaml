@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vue-monitoreo-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "monitoreo-ip"
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: monitoreo-vue
+              servicePort: 80
+          - path: /API/*
+            backend:
+              serviceName: monitoreo-api
+              servicePort: 3000
