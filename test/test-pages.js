@@ -11,7 +11,7 @@ const user = {
 };
 
 describe("GET /datos", () => {
-  it("Route Get datos test", (done) => {
+  it("Route Get datos", (done) => {
     apptest
       .get("/API/user/data")
       .set("Content-Type", "application/json; charset=utf-8")
