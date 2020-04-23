@@ -15,7 +15,7 @@ describe("GET /datos", () => {
     apptest
       .get("/API/user/data")
       .set("Content-Type", "application/json; charset=utf-8")
-      .expect(407, done);
+      .expect(401, done);
   });
 });
 
