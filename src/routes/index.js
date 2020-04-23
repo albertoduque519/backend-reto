@@ -27,5 +27,6 @@ router.put("/API/user/data/:id", [jwt, securityBasic], user.updateUser);
 router.get("/API/user/data", [jwt, securityBasic], user.getData);
 router.get("/API/clients", [jwt, securityBasic], clients.getClients);
 router.get("/API/stats/client-disk-usage", [jwt, securityBasic], stats.getDiskSpaceStatsByClient);
+router.get("/API/stats/client-disk-usage-date", [jwt, securityBasic], stats.getDiskSpaceStatsByDate);
 
 module.exports = router;
