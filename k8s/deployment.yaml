@@ -16,4 +16,19 @@ spec:
         - name: monitoreo-api
           image: us.gcr.io/skillful-figure-271013/monitoreo-api
           imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: "3000"
+            - name: SECRET
+              value: "miclaveultrasecreta123*"
+            - name: HOST
+              value: "localhost"
+            - name: RAIGUN_API
+              value: "123aasdasd"
+            - name: DB_HOST
+              value: "postgres3"
+            - name: DB_USER
+              value: "root"
+            - name: DB_DATABASE
+              value: "db_monitoreo"
        
