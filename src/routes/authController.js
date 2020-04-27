@@ -1,19 +1,14 @@
-const jwt = require('jsonwebtoken')
+const usersService = require('../services/Usuarios')
 const randtoken = require('rand-token')
 
 const refreshTokens = {}
 const { SECRET } = process.env
 
-exports.signup = (req, res) => {
-  if (req.body.username === 'admin' && req.body.password === 'admin') {
-    const payload = {
-      check: true,
-      user: req.body.username,
-    }
-    const token = jwt.sign(payload, SECRET, { expiresIn: 30000 })
-    const refreshToken = randtoken.uid(256)
-    refreshTokens[refreshToken] = req.body.username
-    res.json({ token: `JWT ${token}`, refreshToken })
+exports.signup = async (req, res) => {
+  if (req.body.username && req.body.password) {
+    const datos = await usersService.getAuth(req.body.username, req.body.password)
+    const token = datos.token
+    res.json({ token: `JWT ${token}` })
   } else {
     res.json({ mensaje: 'Usuario o contraseña incorrectos' })
   }

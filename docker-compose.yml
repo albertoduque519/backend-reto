@@ -6,18 +6,21 @@ services:
     ports:
       - "5431:5432"
     env_file:
-      - .env
+      - .env-example
     volumes:
       - database-datas4:/var/lib/postgresql/data/
   gke-solati-deployment:
-    build: .
-    command: npm run start
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    depends_on:
+      - database
     volumes:
       - .:/usr/src/node/
       - /usr/src/node/node_modules
     ports:
       - "3000:3000"
     env_file:
-      - .env
+      - .env-example
 volumes:
   database-datas4:
