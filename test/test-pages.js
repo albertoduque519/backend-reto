@@ -6,20 +6,12 @@ const app = require("../src/server");
 const apptest = supertest(app);
 
 const user = {
-  username: "admin",
-  password: "admin",
+  username: "covinoc",
+  password: "eyJ0eXAiOiJKV1QiLCJhbGciOi",
 };
 
-describe("GET /datos", () => {
-  it("Route Get datos test", (done) => {
-    apptest
-      .get("/API/user/data")
-      .set("Content-Type", "application/json; charset=utf-8")
-      .expect(401, done);
-  });
-});
 
-describe("POST /authentication", () => {
+describe("POST /authentication", async () => {
   it("Route authentication", (done) => {
     apptest
       .post("/API/authentication")
