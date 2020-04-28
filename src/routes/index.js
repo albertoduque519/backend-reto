@@ -17,7 +17,6 @@ const securityBasic = (req, res, next) => {
       res.__("Password")
     );
   }
-  next();
 };
 
 router.get("/", user.getUserInfo);

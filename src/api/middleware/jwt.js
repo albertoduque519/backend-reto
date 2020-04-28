@@ -9,22 +9,26 @@ const apiAuth = axios.create({
 })
 
 const jwt = async (req, res, next) => {
+  console.log("JWT----TEST");
   const token = req.headers.authorization
-  if (token && token.split(' ')[0] === 'Bearer') {
-    let data = await apiAuth.get('/verificacion', { headers: { 'Authorization': token } })
-    console.log('data', data)
-    if (!data) {
-      // eslint-disable-next-line no-underscore-dangle
-      throw new ErrorHandler(HttpStatus.getStatusText(HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED, res.__('Password'))
+
+  try {
+    if (token && token.split(' ')[0] === 'Bearer') {
+      let response = await apiAuth.get('/verificacion', { headers: { 'Authorization': token } }).catch(error => {
+        console.log(error.response)
+      });
+      if (!response) {
+        req.isAuthenticated = false
+      }
+      req.isAuthenticated = true
+      req.user = response.data
+      next()
     }
-    req.decoded = data
-    req.isAuthenticated = true
-    req.user = data.empresa
-    next()
-  } else {
-    // eslint-disable-next-line no-underscore-dangle
-    throw new ErrorHandler(HttpStatus.getStatusText(HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED, res.__('Password'))
+  } catch (e) {
+    req.isAuthenticated = false
   }
+
+  next()
 }
 
 module.exports = { jwt }

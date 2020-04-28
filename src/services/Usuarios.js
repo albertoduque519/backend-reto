@@ -7,7 +7,8 @@ const apiAuth = axios.create({
 
 const getAuth = async function (usuario, contrasena) {
 
-  let { data: { datos } } = await apiAuth.post('/autenticacion', { usuario, contrasena })
+  let { data: { datos } } = await apiAuth.post('/autenticacion',
+    { usuario, contrasena })
   return datos || false
 }
 
