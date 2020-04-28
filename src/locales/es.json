@@ -1,6 +1,6 @@
 {
-    "Password": "Contraseñas",
-    "errors": {
-        "000": "Token expirado"
-    }
+  "Password": "Token invalido",
+  "errors": {
+    "000": "Token expirado"
+  }
 }
