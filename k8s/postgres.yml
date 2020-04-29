@@ -10,7 +10,7 @@ data:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: postgres-pv-claim2
+  name: postgres-pv-claim-monitoreo
 spec:
   accessModes:
     - ReadWriteOnce
@@ -21,20 +21,20 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: postgres3
+  name: postgres-monitoreo
 spec:
   template:
     metadata:
       labels:
-        app: postgres3
+        app: postgres-monitoreo
     spec:
       volumes:
-        - name: postgres-storage2
+        - name: postgres-storage-monitoreo
           persistentVolumeClaim:
-            claimName: postgres-pv-claim2
+            claimName: postgres-pv-claim-monitoreo
       containers:
         - image: postgres:10
-          name: postgres3
+          name: postgres-monitoreo
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -50,18 +50,18 @@ spec:
               value: /var/lib/postgresql/data/pgdata
           ports:
             - containerPort: 5432
-              name: postgres3
+              name: pg-monitoreo
           volumeMounts:
-            - name: postgres-storage2
+            - name: postgres-storage-monitoreo
               mountPath: /var/lib/postgresql/data
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: postgres3
+  name: postgres-monitoreo
 spec:
   type: ClusterIP
   ports:
     - port: 5432
   selector:
-    app: postgres3
+    app: postgres-monitoreo
