@@ -34,9 +34,9 @@ const getDiskSpaceStatsByDate = async function (idClient = null, startDate = nul
   if (endDate) {
     where += ` AND medicion_cliente_resultado.fecha <= '${endDate}' `
   }
-  let groupBy = ' group By mmedicion_cliente.tipo,medicion_cliente_resultado.fecha'
+  let groupBy = ' group By mmedicion_cliente.tipo,date(medicion_cliente_resultado.fecha)'
 
-  const records = await sequelize.query('SELECT  medicion_cliente_resultado.fecha,mmedicion_cliente.tipo,sum(medicion_cliente_resultado.tamano) as tamano' +
+  const records = await sequelize.query('SELECT  date(medicion_cliente_resultado.fecha),mmedicion_cliente.tipo,sum(medicion_cliente_resultado.tamano) as tamano' +
     ' FROM cclientes INNER JOIN medicion_cliente_resultado ON(medicion_cliente_resultado.idcliente = cclientes.id)' +
     ' LEFT JOIN mmedicion_cliente ON(medicion_cliente_resultado.idmedicion_cliente=mmedicion_cliente.id)' + where + groupBy, {
     type: QueryTypes.SELECT
@@ -46,7 +46,7 @@ const getDiskSpaceStatsByDate = async function (idClient = null, startDate = nul
     return {
       tipo: item.tipo,
       tamano: item.tamano,
-      fecha: item.fecha
+      fecha: item.date
     }
   }) || false
 }
