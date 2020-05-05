@@ -9,6 +9,8 @@ services:
       - .env-example
     volumes:
       - database-datas4:/var/lib/postgresql/data/
+    networks:
+      -  ws-autenticacion_servicios
   gke-solati-deployment:
     build: 
       context: .
@@ -22,5 +24,10 @@ services:
       - "3000:3000"
     env_file:
       - .env-example
+    networks:
+      -  ws-autenticacion_servicios
+networks:
+  ws-autenticacion_servicios:
+    external: true
 volumes:
   database-datas4:

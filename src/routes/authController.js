@@ -1,14 +1,17 @@
 const usersService = require('../services/Usuarios')
-const randtoken = require('rand-token')
-
-const refreshTokens = {}
-const { SECRET } = process.env
 
 exports.signup = async (req, res) => {
   if (req.body.username && req.body.password) {
-    const datos = await usersService.getAuth(req.body.username, req.body.password)
-    const token = datos.token
-    res.json({ token: `JWT ${token}` })
+    try {
+      const datos = await usersService.getAuth(req.body.username, req.body.password)
+      const token = datos.token
+      if (token) {
+        const userInfo = await usersService.getUser(`Bearer ${token}`);
+        res.json({ token: `JWT ${token}`, userInfo: userInfo })
+      }
+    } catch (error) {
+      res.json({ mensaje: 'Usuario o contraseña incorrectos' })
+    }
   } else {
     res.json({ mensaje: 'Usuario o contraseña incorrectos' })
   }

@@ -9,16 +9,15 @@ const apiAuth = axios.create({
 })
 
 const jwt = async (req, res, next) => {
-  console.log("JWT----TEST");
   const token = req.headers.authorization
-
   try {
     if (token && token.split(' ')[0] === 'Bearer') {
       let response = await apiAuth.get('/verificacion', { headers: { 'Authorization': token } }).catch(error => {
-        console.log(error.response)
+        next()
       });
       if (!response) {
         req.isAuthenticated = false
+        next()
       }
       req.isAuthenticated = true
       req.user = response.data
