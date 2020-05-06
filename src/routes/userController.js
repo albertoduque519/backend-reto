@@ -1,25 +1,33 @@
-const usersService = require('../services/Clientes')
-const refreshTokens = {};
+const usersService = require('../services/Usuarios')
 
 exports.getUserInfo = (req, res) => {
   res.json({ message: "recurso de entrada changes", response: refreshTokens });
 };
 
-exports.updateUser = (req, res) => {
-  const { id: company } = req.params;
-  const datos = [{ id: company, nombre: "Asfo" }];
+exports.getUser = async (req, res) => {
+  let user = await usersService.getUser()
 
-  res.json(datos);
+  res.json(user);
 };
 
-exports.getData = async (req, res) => {
-  let clientes = await usersService.getClients()
-  console.log(clientes)
-  const datos = [
-    { id: 1, nombre: "Clients" },
-    { id: 2, nombre: "Denisse" },
-    { id: 3, nombre: "Carlos" }
-  ];
+exports.getUsers = async (req, res) => {
+  let users = await usersService.getUsers()
 
-  res.json(datos);
+  res.json(users);
+};
+
+
+exports.updateUser = async (req, res) => {
+  var id = parseInt(req.params.id)
+  let userInfo = req.body.userInfo
+  let users = await usersService.updateUser(id, userInfo)
+
+  res.json(users);
+};
+
+exports.createUser = async (req, res) => {
+  let userInfo = req.body.userInfo
+  let users = await usersService.createUser(userInfo)
+
+  res.json(users);
 };
