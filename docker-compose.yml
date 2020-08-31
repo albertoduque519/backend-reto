@@ -11,7 +11,7 @@ services:
       - database-datas4:/var/lib/postgresql/data/
     networks:
       - ws-autenticacion_servicios
-  gke-solati-deployment:
+  gke-dcoker-deployment:
     build:
       context: .
       dockerfile: Dockerfile.dev
