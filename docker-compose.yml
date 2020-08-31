@@ -10,9 +10,9 @@ services:
     volumes:
       - database-datas4:/var/lib/postgresql/data/
     networks:
-      -  ws-autenticacion_servicios
+      - ws-autenticacion_servicios
   gke-solati-deployment:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
     depends_on:
@@ -23,9 +23,9 @@ services:
     ports:
       - "3000:3000"
     env_file:
-      - .env-example
+      - .env
     networks:
-      -  ws-autenticacion_servicios
+      - ws-autenticacion_servicios
 networks:
   ws-autenticacion_servicios:
     external: true

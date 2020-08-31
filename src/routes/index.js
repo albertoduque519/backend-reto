@@ -19,14 +19,23 @@ const securityBasic = (req, res, next) => {
   }
 };
 
-router.get("/", user.getUserInfo);
+router.get("/", user.getUser);
 router.post("/API/authentication", auth.signup);
 
 router.put("/API/user/:id", [jwt, securityBasic], user.updateUser);
 router.post("/API/user", [jwt, securityBasic], user.createUser);
+router.get("/API/user/:id", [jwt, securityBasic], user.getUser);
 router.get("/API/users", [jwt, securityBasic], user.getUsers);
 router.get("/API/clients", [jwt, securityBasic], clients.getClients);
-router.get("/API/stats/client-disk-usage", [jwt, securityBasic], stats.getDiskSpaceStatsByClient);
-router.get("/API/stats/client-disk-usage-date", [jwt, securityBasic], stats.getDiskSpaceStatsByDate);
+router.get(
+  "/API/stats/client-disk-usage",
+  [jwt, securityBasic],
+  stats.getDiskSpaceStatsByClient
+);
+router.get(
+  "/API/stats/client-disk-usage-date",
+  [jwt, securityBasic],
+  stats.getDiskSpaceStatsByDate
+);
 
 module.exports = router;

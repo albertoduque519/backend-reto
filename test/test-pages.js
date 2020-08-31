@@ -6,10 +6,9 @@ const app = require("../src/server");
 const apptest = supertest(app);
 
 const user = {
-  username: "covinoc",
+  username: "admin",
   password: "eyJ0eXAiOiJKV1QiLCJhbGciOi",
 };
-
 
 describe("POST /authentication", async () => {
   it("Route authentication", (done) => {
